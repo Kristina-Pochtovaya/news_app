@@ -1,0 +1,18 @@
+@forward './fonts';
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, Work Sans, Inter, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  background-color: rgb(255, 255, 255);
+  color-scheme: light dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  box-sizing: border-box;
+}

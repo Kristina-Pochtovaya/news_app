@@ -1,0 +1,86 @@
+@use '../colors';
+
+.header {
+  padding: 40px 0;
+}
+.container {
+  padding: 0 150px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+
+  &_image {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 7px;
+
+    img {
+      object-position: center;
+      object-fit: contain;
+    }
+  }
+
+  &_name {
+    display: flex;
+    font-family: Work Sans;
+    font-weight: 300;
+    font-size: 16px;
+  }
+
+  &_name {
+    &__highlighted {
+      font-weight: 500;
+    }
+  }
+}
+
+.main {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 0 -15px 40px;
+
+  > * {
+    margin: 0 15px;
+  }
+}
+
+.inputBase {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+    background: url('../../assets/search.png') center / contain no-repeat;
+  }
+}
+
+input {
+  width: 166px;
+  padding: 8px 16px;
+  background-color: colors.$secondary_100;
+}
+
+.title {
+  margin: 0 auto;
+  font-family: Work Sans;
+  font-weight: 600;
+  font-size: 30px;
+  color: colors.$secondary_800;
+}
