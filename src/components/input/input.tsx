@@ -13,7 +13,8 @@ export type inputConfigurationType = {
 }
 
 export type InputProps = {
-  onChange: React.ChangeEventHandler<HTMLInputElement> | undefined
+  id: string
+  handleOnChange: React.ChangeEventHandler<HTMLInputElement> | undefined
   configuration?: inputConfigurationType
   value?: string
   type?: keyof typeof inputTypes
@@ -26,7 +27,8 @@ export type InputProps = {
 }
 
 export function Input({
-  onChange,
+  id,
+  handleOnChange,
   classNames,
   title,
   configuration,
@@ -36,11 +38,14 @@ export function Input({
   return (
     <div className={clsx(styles.base, classNames?.base)}>
       {title !== undefined && (
-        <p className={clsx(styles.title, classNames?.title)}>{title}</p>
+        <label htmlFor={id} className={clsx(styles.title, classNames?.title)}>
+          {title}
+        </label>
       )}
       <input
+        id={id}
         className={clsx(styles.input, classNames?.input)}
-        onChange={onChange}
+        onChange={handleOnChange}
         type={type}
         value={value}
         {...configuration}

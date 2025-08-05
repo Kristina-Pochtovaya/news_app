@@ -1,0 +1,109 @@
+.header_actions {
+  display: flex;
+}
+
+.select {
+  height: 20px;
+
+  &_lifeTime {
+    width: 185px;
+    margin-right: 15px;
+  }
+
+  &_updateTime {
+    width: 245px;
+  }
+}
+
+:global {
+  .life-time__control,
+  .update-time__control {
+    .news & {
+      background-color: rgb(255, 255, 255);
+      border: none;
+      cursor: pointer;
+      font-family: Inter;
+      font-weight: 600;
+      font-size: 16px;
+    }
+  }
+
+  .life-time__value-container,
+  .update-time__value-container {
+    .news & {
+      padding: 0;
+    }
+  }
+
+  .life-time__control--is-focused,
+  .update-time__control--is-focused {
+    .news & {
+      border: none;
+      box-shadow: none;
+    }
+  }
+
+  .life-time__control--menu-is-open {
+    .life-time__dropdown-indicator {
+      transform: rotate(180deg);
+      transition: 0.2s ease-in-out;
+    }
+  }
+
+  .update-time__control--menu-is-open {
+    .update-time__dropdown-indicator {
+      transform: rotate(180deg);
+      transition: 0.2s ease-in-out;
+    }
+  }
+
+  .life-time__indicator-separator,
+  .update-time__indicator-separator {
+    .news & {
+      display: none;
+    }
+  }
+
+  .life-time__option,
+  .update-time__option {
+    font-weight: 400;
+
+    .news & {
+      &:active {
+        background-color: rgb(255, 255, 255);
+        color: black;
+        border: none;
+        box-shadow: none;
+      }
+
+      &--is-focused {
+        border: none;
+        box-shadow: none;
+        background-color: rgb(255, 255, 255);
+        color: rgb(0, 0, 0);
+        cursor: pointer;
+      }
+
+      &--is-selected {
+        border: none;
+        box-shadow: none;
+        background-color: rgb(255, 255, 255);
+        color: rgb(0, 0, 0);
+        position: relative;
+
+        &::after {
+          content: '';
+          width: 16px;
+          height: 16px;
+          border: none;
+          pointer-events: none;
+          background: url('../../../assets/tick.png') center / contain no-repeat;
+          position: absolute;
+          right: 10px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      }
+    }
+  }
+}

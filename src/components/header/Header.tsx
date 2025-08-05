@@ -20,8 +20,9 @@ export function Header() {
 
             <div className={styles.search}>
               <Input
+                id={'search'}
                 classNames={{ base: styles.inputBase, input: styles.input }}
-                onChange={undefined}
+                handleOnChange={undefined}
                 configuration={{ placeholder: 'Search' }}
               />
             </div>
