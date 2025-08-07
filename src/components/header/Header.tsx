@@ -1,8 +1,30 @@
 import styles from './header.module.scss'
 import { Input } from '../input/input'
 import logo from '../../assets/logo.png'
+import { useAppDispatch } from '../../store/store'
+import { setFilter } from '../../store/slices/newsSlice'
+import { useEffect, useState } from 'react'
+import { Button } from '../button/button'
 
 export function Header() {
+  const [isSearch, setIsSearch] = useState(false)
+  const [searchValue, setSearchValue] = useState('')
+
+  useEffect(() => {
+    if (searchValue.length === 0) {
+      setIsSearch(false)
+    }
+  }, [searchValue])
+
+  const dispatch = useAppDispatch()
+
+  function handleOnChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const trimmedSearchString = event.target.value.toLowerCase().trim()
+    setSearchValue(event.target.value)
+    setIsSearch(true)
+    dispatch(setFilter(trimmedSearchString))
+  }
+
   return (
     <div className={styles.header}>
       <div className={styles.container}>
@@ -20,11 +42,31 @@ export function Header() {
 
             <div className={styles.search}>
               <Input
+                value={searchValue}
                 id={'search'}
                 classNames={{ base: styles.inputBase, input: styles.input }}
-                handleOnChange={undefined}
+                handleOnChange={handleOnChange}
                 configuration={{ placeholder: 'Search' }}
               />
+              {isSearch ? (
+                <Button
+                  handleOnClick={() => {
+                    dispatch(setFilter(''))
+                    setSearchValue('')
+                    setIsSearch(false)
+                  }}
+                  classNames={{ button: styles.closeSearchAction }}
+                  content={''}
+                />
+              ) : (
+                <Button
+                  handleOnClick={() => {
+                    setIsSearch(true)
+                  }}
+                  classNames={{ button: styles.searchAction }}
+                  content={''}
+                />
+              )}
             </div>
           </div>
           <div className={styles.title}>

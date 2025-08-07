@@ -1,0 +1,69 @@
+@use '../colors';
+
+.card {
+  width: 392px;
+  border: 1px solid colors.$secondary_200;
+  border-radius: 12px;
+  padding: 16px 0;
+  cursor: pointer;
+}
+
+.cardWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 16px;
+  height: 100%;
+}
+
+.image {
+  margin-bottom: 24px;
+
+  img {
+    width: 360px;
+    height: 290px;
+    background: center / contain no-repeat;
+  }
+}
+
+.title {
+  margin-bottom: 20px;
+
+  p {
+    font-family: Work Sans;
+    font-weight: 600;
+    font-size: 24px;
+    color: colors.$secondary_800;
+    margin: 0 auto;
+  }
+}
+
+.title {
+  margin-bottom: 20px;
+
+  p {
+    font-family: Work Sans;
+    font-weight: 600;
+    font-size: 24px;
+    color: colors.$secondary_800;
+    margin: 0 auto;
+  }
+}
+
+.footer {
+  display: flex;
+  width: 100%;
+}
+
+.author {
+  margin-right: 20px;
+}
+
+.author p,
+.date p {
+  font-family: Work Sans;
+  font-weight: 500;
+  font-size: 16px;
+  color: colors.$secondary_300;
+}

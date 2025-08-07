@@ -57,18 +57,6 @@
 
 .inputBase {
   position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 10px;
-    width: 16px;
-    height: 16px;
-    pointer-events: none;
-    background: url('../../assets/search.png') center / contain no-repeat;
-  }
 }
 
 input {
@@ -83,4 +71,33 @@ input {
   font-weight: 600;
   font-size: 30px;
   color: colors.$secondary_800;
+}
+
+.search {
+  position: relative;
+}
+
+.searchAction,
+.closeSearchAction {
+  .header & {
+    position: absolute;
+    height: 25px;
+    width: 25px;
+    background-color: transparent;
+    border: none;
+    top: 4px;
+    right: 4px;
+  }
+}
+
+.searchAction {
+  .header & {
+    background: url('../../assets/search.png') center / contain no-repeat;
+  }
+}
+
+.closeSearchAction {
+  .header & {
+    background: url('../../assets/close_search.png') center / contain no-repeat;
+  }
 }

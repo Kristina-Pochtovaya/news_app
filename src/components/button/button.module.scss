@@ -1,0 +1,19 @@
+@use '../colors';
+
+.button {
+  border: 1px solid colors.$border_color;
+  background-color: rgb(255, 255, 255);
+  border-radius: 6px;
+  width: 118px;
+  height: 48px;
+  margin: auto;
+  cursor: pointer;
+  font-family: Work Sans;
+  font-weight: 500;
+  color: colors.$secondary_500;
+  font-size: 16px;
+
+  &:focus {
+    outline: none;
+  }
+}
