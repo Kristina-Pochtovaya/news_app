@@ -8,22 +8,28 @@ import type {
   updateTimeOptionsKeys,
 } from '../../components/common/options'
 
-type SliceNewsType = {
+export type SliceNewsType = {
   hasError: boolean
   isLoading: boolean
   searchString: string
   filterByCreateDate?: keyof typeof lifeTimeOptionsKeys
   filterByEditDate?: keyof typeof updateTimeOptionsKeys
-  news: NewsType[] | []
+  count: number
+  next: string | null
+  previous: string | null
+  results: NewsType[] | []
 }
 
 const initialState: SliceNewsType = {
   hasError: false,
   isLoading: true,
   searchString: '',
+  count: 0,
+  next: null,
+  previous: null,
   filterByCreateDate: undefined,
   filterByEditDate: undefined,
-  news: [],
+  results: [],
 }
 
 export const newsSlice = createSlice({
@@ -56,16 +62,20 @@ export const newsSlice = createSlice({
     })
     builder.addCase(
       getNews.fulfilled,
-      (state, action: PayloadAction<NewsType[]>) => {
-        const uniqueNews = [...state.news, ...action.payload].filter(
-          (item, index, array) =>
-            index === array.findIndex((obj) => obj.id === item.id)
-        )
+      (_, action: PayloadAction<SliceNewsType>) => {
+        console.log(action.payload.results, 'action.payload ')
+        // const uniqueNews = action.payload.results.filter(
+        //   (item, index, array) =>
+        //     index === array.findIndex((obj) => obj.id === item.id)
+        // )
         return {
           searchString: '',
           hasError: false,
           isLoading: false,
-          news: uniqueNews,
+          count: action.payload.count,
+          previous: action.payload.previous,
+          next: action.payload.next,
+          results: action.payload.results,
         }
       }
     )
@@ -80,6 +90,8 @@ export const newsSlice = createSlice({
 })
 
 export const selectNews = (state: RootState) => state.news
+export const selectNext = (state: RootState) => state.news.next
+export const selectPrevious = (state: RootState) => state.news.previous
 export const { setFilterByValue, setFilterByCreateDate, setFilterByEditDate } =
   newsSlice.actions
 export default newsSlice.reducer

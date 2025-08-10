@@ -1,0 +1,14 @@
+@use 'sass:math';
+@use 'sass:meta';
+
+@function _normalize-alpha($alpha) {
+  @if meta.type-of($alpha) == 'number' and $alpha > 1 {
+    @return math.div($alpha, 100);
+  }
+  @return $alpha;
+}
+
+@mixin color-with-alpha($property, $color, $alpha: 1) {
+  $a: _normalize-alpha($alpha);
+  #{$property}: rgba($color, $a);
+}

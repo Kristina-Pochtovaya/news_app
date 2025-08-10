@@ -1,9 +1,7 @@
 import { useEffect } from 'react'
 import styles from './card.module.scss'
 import { useAppDispatch } from '../../store/store'
-import { selectOneNews } from '../../store/slices/oneNewsSlice'
 import { getOneNews } from '../../store/thunks/oneNews'
-import { useSelector } from 'react-redux'
 import type { NewsType } from '../../types/news'
 import { formatDate } from '../../helpers/format_date'
 

@@ -6,6 +6,8 @@ import {
   selectNews,
   setFilterByCreateDate,
   setFilterByEditDate,
+  selectNext,
+  selectPrevious,
 } from '../../../store/slices/newsSlice'
 import { useAppDispatch } from '../../../store/store'
 import {
@@ -16,8 +18,9 @@ import {
   type SelectLifeTimeOptionType,
   type SelectUpdateTimeOptionType,
 } from '../../common/options'
-import Select, { type ActionMeta, type SingleValue } from 'react-select'
-import { Card } from '../../card/Card'
+import Select, { type SingleValue } from 'react-select'
+// import Select, { type ActionMeta, type SingleValue } from 'react-select'
+import { Card } from '../../card/сard'
 import { Button } from '../../button/button'
 import type { NewsType } from '../../../types/news'
 
@@ -29,13 +32,13 @@ export function sortDate<T>(
   filteredArray.sort((firstNews, secondNews) => {
     if (currentFilterValue === valueToFilter) {
       return (
-        new Date(firstNews.published_at).getDate() -
-        new Date(secondNews.published_at).getDate()
+        new Date(firstNews.published_at).getTime() -
+        new Date(secondNews.published_at).getTime()
       )
     }
     return (
-      new Date(secondNews.published_at).getDate() -
-      new Date(firstNews.published_at).getDate()
+      new Date(secondNews.published_at).getTime() -
+      new Date(firstNews.published_at).getTime()
     )
   })
 }
@@ -51,13 +54,16 @@ export function News() {
 
   const dispatch = useAppDispatch()
   const news = useSelector(selectNews)
+  const next = useSelector(selectNext)
+  const previous = useSelector(selectPrevious)
 
   useEffect(() => {
     dispatch(getNews())
   }, [dispatch])
 
   useEffect(() => {
-    let filteredArray = news.news.filter((oneNews) => {
+    console.log(news.results)
+    let filteredArray = news.results.filter((oneNews) => {
       return (
         oneNews.title.toLowerCase().includes(news.searchString) ||
         oneNews.authors.some((author) =>
@@ -83,16 +89,18 @@ export function News() {
     }
 
     setFilteredNews(filteredArray)
+    // console.log(filteredArray, 'filteredArray')
   }, [
-    news.news.length,
+    news.results,
+    news.results.length,
     news.searchString,
     news.filterByCreateDate,
     news.filterByEditDate,
   ])
 
   function handleOnChangeLifeTimeOption(
-    newValue: SingleValue<SelectLifeTimeOptionType>,
-    actionMeta: ActionMeta<SelectLifeTimeOptionType>
+    newValue: SingleValue<SelectLifeTimeOptionType>
+    // actionMeta: ActionMeta<SelectLifeTimeOptionType>
   ) {
     if (!newValue?.value) {
       return
@@ -104,16 +112,17 @@ export function News() {
   }
 
   function handleOnChangeUpdateTimeOption(
-    newValue: SingleValue<SelectUpdateTimeOptionType>,
-    actionMeta: ActionMeta<SelectUpdateTimeOptionType>
+    newValue: SingleValue<SelectUpdateTimeOptionType>
+    // actionMeta: ActionMeta<SelectUpdateTimeOptionType>
   ) {
     if (!newValue?.value) {
       return
     }
-    setUpdateTimeOption(newValue)
     setLifeTimeOption(undefined)
-    dispatch(setFilterByEditDate(newValue.value))
     dispatch(setFilterByCreateDate(undefined))
+    setUpdateTimeOption(newValue)
+
+    dispatch(setFilterByEditDate(newValue.value))
   }
 
   return (
@@ -146,8 +155,20 @@ export function News() {
         </div>
         <div className={styles.footer}>
           <div className={styles.footer_actions}>
-            <Button handleOnClick={() => {}} content={'LoadPrev'} />
-            <Button handleOnClick={() => {}} content={'LoadNext'} />
+            <Button
+              disabled={!previous}
+              handleOnClick={() => {
+                dispatch(getNews(previous))
+              }}
+              content={'LoadPrev'}
+            />
+            <Button
+              disabled={!next}
+              handleOnClick={() => {
+                dispatch(getNews(next))
+              }}
+              content={'LoadNext'}
+            />
           </div>
         </div>
       </div>

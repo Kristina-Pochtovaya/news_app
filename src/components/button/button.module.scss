@@ -1,4 +1,5 @@
-@use '../colors';
+@use '../../colors';
+@use '../../mixins';
 
 .button {
   border: 1px solid colors.$border_color;
@@ -11,7 +12,15 @@
   font-family: Work Sans;
   font-weight: 500;
   color: colors.$secondary_500;
+
   font-size: 16px;
+
+  &__disabled {
+    pointer-events: none;
+    cursor: pointer;
+    @include mixins.color-with-alpha(border-color, colors.$border_color, 10);
+    @include mixins.color-with-alpha(color, colors.$secondary_500, 50);
+  }
 
   &:focus {
     outline: none;

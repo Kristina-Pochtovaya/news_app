@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { getNews } from '../thunks/news'
+
 import type { RootState } from '../store'
 import type { NewsType } from '../../types/news'
 import { getOneNews } from '../thunks/oneNews'
