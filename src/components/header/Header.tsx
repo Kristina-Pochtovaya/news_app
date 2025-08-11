@@ -5,6 +5,7 @@ import { useAppDispatch } from '../../store/store'
 import { setFilterByValue } from '../../store/slices/newsSlice'
 import { useEffect, useState } from 'react'
 import { Button } from '../button/button'
+import { getNews } from '../../store/thunks/news'
 
 export function Header() {
   const [isSearch, setIsSearch] = useState(false)
@@ -23,6 +24,7 @@ export function Header() {
     setSearchValue(event.target.value)
     setIsSearch(true)
     dispatch(setFilterByValue(trimmedSearchString))
+    // dispatch(getNews({ search: trimmedSearchString }))
   }
 
   return (

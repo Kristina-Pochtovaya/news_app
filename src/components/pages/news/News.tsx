@@ -58,7 +58,7 @@ export function News() {
   const previous = useSelector(selectPrevious)
 
   useEffect(() => {
-    dispatch(getNews())
+    dispatch(getNews({ newUrl: null }))
   }, [dispatch])
 
   useEffect(() => {
@@ -158,14 +158,14 @@ export function News() {
             <Button
               disabled={!previous}
               handleOnClick={() => {
-                dispatch(getNews(previous))
+                dispatch(getNews({ newUrl: previous }))
               }}
               content={'LoadPrev'}
             />
             <Button
               disabled={!next}
               handleOnClick={() => {
-                dispatch(getNews(next))
+                dispatch(getNews({ newUrl: next }))
               }}
               content={'LoadNext'}
             />
