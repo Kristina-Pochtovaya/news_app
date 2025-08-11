@@ -2,7 +2,6 @@ import styles from './header.module.scss'
 import { Input } from '../input/input'
 import logo from '../../assets/logo.png'
 import { useAppDispatch } from '../../store/store'
-import { setFilterByValue } from '../../store/slices/newsSlice'
 import { useEffect, useState } from 'react'
 import { Button } from '../button/button'
 import { getNews } from '../../store/thunks/news'
@@ -23,8 +22,7 @@ export function Header() {
     const trimmedSearchString = event.target.value.toLowerCase().trim()
     setSearchValue(event.target.value)
     setIsSearch(true)
-    dispatch(setFilterByValue(trimmedSearchString))
-    // dispatch(getNews({ search: trimmedSearchString }))
+    dispatch(getNews({ search: trimmedSearchString }))
   }
 
   return (
@@ -53,7 +51,7 @@ export function Header() {
               {isSearch ? (
                 <Button
                   handleOnClick={() => {
-                    dispatch(setFilterByValue(''))
+                    dispatch(getNews({ search: undefined }))
                     setSearchValue('')
                     setIsSearch(false)
                   }}

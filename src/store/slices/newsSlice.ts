@@ -35,23 +35,7 @@ const initialState: SliceNewsType = {
 export const newsSlice = createSlice({
   name: 'news',
   initialState,
-  reducers: {
-    setFilterByValue: (state, action: PayloadAction<string>) => {
-      return { ...state, searchString: action.payload }
-    },
-    setFilterByCreateDate: (
-      state,
-      action: PayloadAction<keyof typeof lifeTimeOptionsKeys | undefined>
-    ) => {
-      return { ...state, filterByCreateDate: action.payload }
-    },
-    setFilterByEditDate: (
-      state,
-      action: PayloadAction<keyof typeof updateTimeOptionsKeys | undefined>
-    ) => {
-      return { ...state, filterByEditDate: action.payload }
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getNews.pending, (state, _) => {
       return {
@@ -63,11 +47,6 @@ export const newsSlice = createSlice({
     builder.addCase(
       getNews.fulfilled,
       (_, action: PayloadAction<SliceNewsType>) => {
-        console.log(action.payload.results, 'action.payload ')
-        // const uniqueNews = action.payload.results.filter(
-        //   (item, index, array) =>
-        //     index === array.findIndex((obj) => obj.id === item.id)
-        // )
         return {
           searchString: '',
           hasError: false,
@@ -92,6 +71,4 @@ export const newsSlice = createSlice({
 export const selectNews = (state: RootState) => state.news
 export const selectNext = (state: RootState) => state.news.next
 export const selectPrevious = (state: RootState) => state.news.previous
-export const { setFilterByValue, setFilterByCreateDate, setFilterByEditDate } =
-  newsSlice.actions
 export default newsSlice.reducer
