@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-
 import type { RootState } from '../store'
 import type { NewsType } from '../../types/news'
 import { getOneNews } from '../thunks/one_news'
@@ -22,7 +21,7 @@ export const oneNewsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getOneNews.pending, (state, _) => {
+    builder.addCase(getOneNews.pending, (state) => {
       return {
         ...state,
         hasError: false,
@@ -32,7 +31,6 @@ export const oneNewsSlice = createSlice({
     builder.addCase(
       getOneNews.fulfilled,
       (state, action: PayloadAction<NewsType>) => {
-        console.log({ ...state.oneNews, ...action.payload }, 'fsdgdgd')
         return {
           hasError: false,
           isLoading: false,
@@ -40,7 +38,7 @@ export const oneNewsSlice = createSlice({
         }
       }
     )
-    builder.addCase(getOneNews.rejected, (state, _) => {
+    builder.addCase(getOneNews.rejected, (state) => {
       return {
         ...state,
         hasError: true,

@@ -11,7 +11,6 @@ export const buttonTypes = {
 export type ButtonProps = {
   handleOnClick: React.MouseEventHandler<HTMLButtonElement>
   content: string | JSX.Element
-  // children: ReactNode
   disabled?: boolean
   type?: keyof typeof buttonTypes
   classNames?: {

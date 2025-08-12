@@ -37,7 +37,7 @@ export const newsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getNews.pending, (state, _) => {
+    builder.addCase(getNews.pending, (state) => {
       return {
         ...state,
         hasError: false,
@@ -46,7 +46,7 @@ export const newsSlice = createSlice({
     })
     builder.addCase(
       getNews.fulfilled,
-      (_, action: PayloadAction<SliceNewsType>) => {
+      (_state, action: PayloadAction<SliceNewsType>) => {
         return {
           searchString: '',
           hasError: false,

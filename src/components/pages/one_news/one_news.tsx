@@ -4,7 +4,7 @@ import { useAppDispatch } from '../../../store/store'
 import { getOneNews } from '../../../store/thunks/one_news'
 import { selectOneNews } from '../../../store/slices/one_news_slice'
 import { useSelector } from 'react-redux'
-import { Navigate, NavLink, useParams } from 'react-router'
+import { NavLink, useParams } from 'react-router'
 import { formatDate } from '../../../helpers/format_date'
 
 export type OneNewsProps = {
