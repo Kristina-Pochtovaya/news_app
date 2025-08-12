@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
-import newsSlice from './slices/newsSlice'
+import newsSlice from './slices/news_slice'
 import { useDispatch } from 'react-redux'
-import oneNewsSlice from './slices/oneNewsSlice'
+import oneNewsSlice from './slices/one_news_slice'
 
 export const store = configureStore({
   reducer: {

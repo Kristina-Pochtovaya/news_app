@@ -6,7 +6,7 @@ import {
   selectNews,
   selectNext,
   selectPrevious,
-} from '../../../store/slices/newsSlice'
+} from '../../../store/slices/news_slice'
 import { useAppDispatch } from '../../../store/store'
 import {
   lifeTimeOptions,

@@ -3,7 +3,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 
 import type { RootState } from '../store'
 import type { NewsType } from '../../types/news'
-import { getOneNews } from '../thunks/oneNews'
+import { getOneNews } from '../thunks/one_news'
 
 type SliceNewsType = {
   hasError: boolean
@@ -32,10 +32,11 @@ export const oneNewsSlice = createSlice({
     builder.addCase(
       getOneNews.fulfilled,
       (state, action: PayloadAction<NewsType>) => {
+        console.log({ ...state.oneNews, ...action.payload }, 'fsdgdgd')
         return {
           hasError: false,
           isLoading: false,
-          news: { ...state.oneNews, ...action.payload },
+          oneNews: { ...state.oneNews, ...action.payload },
         }
       }
     )
