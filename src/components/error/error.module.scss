@@ -1,0 +1,27 @@
+@use '../../colors';
+
+.error {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: rgb(255, 255, 255);
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text {
+  margin-right: 5px;
+  font-family: Work Sans;
+  font-weight: 600;
+  font-size: 30px;
+  color: colors.$secondary_800;
+}

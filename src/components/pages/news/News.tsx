@@ -19,6 +19,8 @@ import {
 import Select, { type SingleValue } from 'react-select'
 import { Card } from '../../card/сard'
 import { Button } from '../../button/button'
+import { Loading } from '../../loading/loading'
+import { Error } from '../../error/error'
 
 export function News() {
   const [lifeTimeOption, setLifeTimeOption] = useState<
@@ -49,6 +51,7 @@ export function News() {
       newValue?.value === lifeTimeOptionsKeys.newest
         ? '-published_at'
         : 'published_at'
+    console.log(ordering, 'd')
     dispatch(getNews({ ordering }))
   }
 
@@ -64,7 +67,16 @@ export function News() {
       newValue?.value === updateTimeOptionsKeys.freshData
         ? '-updated_at'
         : 'updated_at'
+    console.log(ordering)
     dispatch(getNews({ ordering }))
+  }
+
+  if (news.isLoading) {
+    return <Loading />
+  }
+
+  if (news.hasError) {
+    return <Error />
   }
 
   return (

@@ -5,10 +5,15 @@ import { useAppDispatch } from '../../store/store'
 import { useEffect, useState } from 'react'
 import { Button } from '../button/button'
 import { getNews } from '../../store/thunks/news'
+import { DEFAULT_DELAY, useDebounce } from '../../helpers/debounce'
 
 export function Header() {
   const [isSearch, setIsSearch] = useState(false)
   const [searchValue, setSearchValue] = useState('')
+
+  const debouncedGetNews = useDebounce((search: string) => {
+    dispatch(getNews({ search: search || undefined }))
+  }, DEFAULT_DELAY)
 
   useEffect(() => {
     if (searchValue.length === 0) {
@@ -22,7 +27,7 @@ export function Header() {
     const trimmedSearchString = event.target.value.toLowerCase().trim()
     setSearchValue(event.target.value)
     setIsSearch(true)
-    dispatch(getNews({ search: trimmedSearchString }))
+    debouncedGetNews(trimmedSearchString)
   }
 
   return (

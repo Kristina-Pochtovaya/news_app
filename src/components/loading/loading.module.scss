@@ -1,0 +1,46 @@
+@use '../../colors';
+
+.loading {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: rgb(255, 255, 255);
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  display: flex;
+  align-items: center;
+  border: 4px solid rgba(138, 176, 237, 0.5);
+  border-radius: 50%;
+  border-top-color: rgb(97, 118, 203);
+  width: 25px;
+  height: 25px;
+  transition: opacity 250ms;
+  animation: rotate-spinner 1s linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rotate-spinner {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.text {
+  margin-right: 5px;
+  font-family: Work Sans;
+  font-weight: 600;
+  font-size: 30px;
+  color: colors.$secondary_800;
+}

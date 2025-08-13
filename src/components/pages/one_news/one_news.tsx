@@ -6,13 +6,15 @@ import { selectOneNews } from '../../../store/slices/one_news_slice'
 import { useSelector } from 'react-redux'
 import { NavLink, useParams } from 'react-router'
 import { formatDate } from '../../../helpers/format_date'
+import { Loading } from '../../loading/loading'
+import { Error } from '../../error/error'
 
 export type OneNewsProps = {
   id: number
 }
 
 export function OneNews() {
-  const { oneNews } = useSelector(selectOneNews)
+  const { oneNews, isLoading, hasError } = useSelector(selectOneNews)
   const dispatch = useAppDispatch()
   const { id } = useParams()
 
@@ -22,9 +24,14 @@ export function OneNews() {
     }
   }, [id, dispatch])
 
-  if (!oneNews) {
-    return
+  if (isLoading) {
+    return <Loading />
   }
+
+  if (hasError || !oneNews) {
+    return <Error />
+  }
+
   return (
     <div className={styles.oneNews}>
       <div className={styles.wrapper}>
@@ -35,7 +42,7 @@ export function OneNews() {
           <div className={styles.generalInfo}>
             <ul className={styles.authors}>
               {oneNews?.authors.map((author, index) => (
-                <li>
+                <li key={index}>
                   {author.name}
                   {index !== oneNews.authors.length - 1 ? ',' : ''}
                 </li>
