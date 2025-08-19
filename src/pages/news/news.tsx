@@ -36,7 +36,7 @@ export function News() {
   const previous = useSelector(selectPrevious)
 
   useEffect(() => {
-    dispatch(getNews({ newUrl: null }))
+    dispatch(getNews({ newUrl: null, ordering: '-published_at' }))
   }, [dispatch])
 
   function handleOnChangeLifeTimeOption(
@@ -51,7 +51,6 @@ export function News() {
       newValue?.value === lifeTimeOptionsKeys.newest
         ? '-published_at'
         : 'published_at'
-    console.log(ordering, 'd')
     dispatch(getNews({ ordering }))
   }
 
