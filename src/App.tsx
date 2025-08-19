@@ -1,8 +1,8 @@
 import { Navigate, Route, Routes } from 'react-router'
 import styles from './app.module.scss'
 import { Header } from './components/header/header'
-import { News } from './components/pages/news/news'
-import { OneNews } from './components/pages/one_news/one_news'
+import { OneNews } from './pages/one_news/one_news'
+import { News } from './pages/news/news'
 
 function App() {
   return (

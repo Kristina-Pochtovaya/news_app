@@ -6,7 +6,7 @@ import type { NewsType } from '../../types/news'
 import type {
   lifeTimeOptionsKeys,
   updateTimeOptionsKeys,
-} from '../../components/common/options'
+} from '../../common/options'
 
 export type SliceNewsType = {
   hasError: boolean

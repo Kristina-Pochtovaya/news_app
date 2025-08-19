@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import styles from './news.module.scss'
-import { getNews } from '../../../store/thunks/news'
+import { getNews } from '../../store/thunks/news'
 import { useSelector } from 'react-redux'
 import {
   selectNews,
   selectNext,
   selectPrevious,
-} from '../../../store/slices/news_slice'
-import { useAppDispatch } from '../../../store/store'
+} from '../../store/slices/news_slice'
+import { useAppDispatch } from '../../store/store'
 import {
   lifeTimeOptions,
   lifeTimeOptionsKeys,
@@ -17,10 +17,10 @@ import {
   type SelectUpdateTimeOptionType,
 } from '../../common/options'
 import Select, { type SingleValue } from 'react-select'
-import { Card } from '../../card/сard'
-import { Button } from '../../button/button'
-import { Loading } from '../../loading/loading'
-import { Error } from '../../error/error'
+import { Card } from '../../components/card/сard'
+import { Button } from '../../components/button/button'
+import { Loading } from '../../components/loading/loading'
+import { Error } from '../../components/error/error'
 
 export function News() {
   const [lifeTimeOption, setLifeTimeOption] = useState<

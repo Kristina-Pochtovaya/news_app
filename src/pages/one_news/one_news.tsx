@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
 import styles from './one_news.module.scss'
-import { useAppDispatch } from '../../../store/store'
-import { getOneNews } from '../../../store/thunks/one_news'
-import { selectOneNews } from '../../../store/slices/one_news_slice'
+import { useAppDispatch } from '../../store/store'
+import { getOneNews } from '../../store/thunks/one_news'
+import { selectOneNews } from '../../store/slices/one_news_slice'
 import { useSelector } from 'react-redux'
 import { NavLink, useParams } from 'react-router'
-import { formatDate } from '../../../helpers/format_date'
-import { Loading } from '../../loading/loading'
-import { Error } from '../../error/error'
+import { formatDate } from '../../helpers/format_date'
+import { Loading } from '../../components/loading/loading'
+import { Error } from '../../components/error/error'
 
 export type OneNewsProps = {
   id: number
