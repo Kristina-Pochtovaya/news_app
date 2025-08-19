@@ -1,0 +1,40 @@
+@use '../../styles/colors';
+
+.searchControllers {
+  position: relative;
+}
+
+.inputBase {
+  position: relative;
+}
+
+input {
+  width: 166px;
+  padding: 8px 27px;
+  background-color: colors.$secondary_100;
+}
+
+.searchAction,
+.closeSearchAction {
+  .searchControllers & {
+    position: absolute;
+    height: 25px;
+    width: 25px;
+    background-color: transparent;
+    border: none;
+    top: 4px;
+    right: 4px;
+  }
+}
+
+.searchAction {
+  .searchControllers & {
+    background: url('../../assets/search.png') center / contain no-repeat;
+  }
+}
+
+.closeSearchAction {
+  .searchControllers & {
+    background: url('../../assets/close_search.png') center / contain no-repeat;
+  }
+}

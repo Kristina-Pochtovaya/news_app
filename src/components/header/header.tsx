@@ -1,41 +1,16 @@
 import styles from './header.module.scss'
-import { Input } from '../input/input'
+
 import logo from '../../assets/logo.png'
-import { useAppDispatch } from '../../store/store'
-import { useEffect, useState } from 'react'
-import { Button } from '../button/button'
-import { getNews } from '../../store/thunks/news'
-import { DEFAULT_DELAY, useDebounce } from '../../helpers/debounce'
+import { SearchControllers } from '../search_controllers/search_controllers'
+import { NavLink } from 'react-router'
 
 export function Header() {
-  const [isSearch, setIsSearch] = useState(false)
-  const [searchValue, setSearchValue] = useState('')
-
-  const debouncedGetNews = useDebounce((search: string) => {
-    dispatch(getNews({ search: search || undefined }))
-  }, DEFAULT_DELAY)
-
-  useEffect(() => {
-    if (searchValue.length === 0) {
-      setIsSearch(false)
-    }
-  }, [searchValue])
-
-  const dispatch = useAppDispatch()
-
-  function handleOnChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const trimmedSearchString = event.target.value.toLowerCase().trim()
-    setSearchValue(event.target.value)
-    setIsSearch(true)
-    debouncedGetNews(trimmedSearchString)
-  }
-
   return (
     <div className={styles.header}>
       <div className={styles.container}>
         <div className={styles.wrapper}>
           <div className={styles.main}>
-            <div className={styles.logo}>
+            <NavLink className={styles.logo} to="/news">
               <div className={styles.logo_image}>
                 <img src={logo} alt="logo" />
               </div>
@@ -43,36 +18,8 @@ export function Header() {
                 <p>Meta</p>
                 <p className={styles.logo_name__highlighted}>Blog</p>
               </div>
-            </div>
-
-            <div className={styles.search}>
-              <Input
-                value={searchValue}
-                id={'search'}
-                classNames={{ base: styles.inputBase, input: styles.input }}
-                handleOnChange={handleOnChange}
-                configuration={{ placeholder: 'Search' }}
-              />
-              {isSearch ? (
-                <Button
-                  handleOnClick={() => {
-                    dispatch(getNews({ search: undefined }))
-                    setSearchValue('')
-                    setIsSearch(false)
-                  }}
-                  classNames={{ button: styles.closeSearchAction }}
-                  content={''}
-                />
-              ) : (
-                <Button
-                  handleOnClick={() => {
-                    setIsSearch(true)
-                  }}
-                  classNames={{ button: styles.searchAction }}
-                  content={''}
-                />
-              )}
-            </div>
+            </NavLink>
+            <SearchControllers />
           </div>
           <div className={styles.title}>
             <p>News Blog</p>
