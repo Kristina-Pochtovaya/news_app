@@ -28,7 +28,7 @@ export function News() {
   >(lifeTimeOptions[0])
   const [updateTimeOption, setUpdateTimeOption] = useState<
     SelectUpdateTimeOptionType | undefined
-  >(updateTimeOptions[0])
+  >(undefined)
 
   const dispatch = useAppDispatch()
   const news = useSelector(selectNews)
