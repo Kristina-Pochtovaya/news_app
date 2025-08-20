@@ -8,10 +8,16 @@ import type {
   updateTimeOptionsKeys,
 } from '../../common/options'
 
+export type Filters = {
+  search?: string
+  ordering?: string
+}
+
 export type SliceNewsType = {
   hasError: boolean
   isLoading: boolean
   searchString: string
+  filters: Filters
   filterByCreateDate?: keyof typeof lifeTimeOptionsKeys
   filterByEditDate?: keyof typeof updateTimeOptionsKeys
   count: number
@@ -24,6 +30,7 @@ const initialState: SliceNewsType = {
   hasError: false,
   isLoading: true,
   searchString: '',
+  filters: { search: '', ordering: '' },
   count: 0,
   next: null,
   previous: null,
@@ -35,7 +42,18 @@ const initialState: SliceNewsType = {
 export const newsSlice = createSlice({
   name: 'news',
   initialState,
-  reducers: {},
+  reducers: {
+    setFilters: (state, action: PayloadAction<Filters>) => {
+      return {
+        ...state,
+
+        filters: {
+          ...state.filters,
+          ...action.payload,
+        },
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getNews.pending, (state) => {
       return {
@@ -46,11 +64,15 @@ export const newsSlice = createSlice({
     })
     builder.addCase(
       getNews.fulfilled,
-      (_state, action: PayloadAction<SliceNewsType>) => {
+      (state, action: PayloadAction<SliceNewsType>) => {
         return {
           searchString: '',
           hasError: false,
           isLoading: false,
+          filters: {
+            ...state.filters,
+            ...action.payload.filters,
+          },
           count: action.payload.count,
           previous: action.payload.previous,
           next: action.payload.next,
@@ -71,4 +93,8 @@ export const newsSlice = createSlice({
 export const selectNews = (state: RootState) => state.news
 export const selectNext = (state: RootState) => state.news.next
 export const selectPrevious = (state: RootState) => state.news.previous
+export const selectFilters = (state: RootState) => state.news.filters
+
+export const { setFilters } = newsSlice.actions
+
 export default newsSlice.reducer

@@ -6,6 +6,7 @@ import {
   selectNews,
   selectNext,
   selectPrevious,
+  setFilters,
 } from '../../store/slices/news_slice'
 import { useAppDispatch } from '../../store/store'
 import {
@@ -36,7 +37,8 @@ export function News() {
   const previous = useSelector(selectPrevious)
 
   useEffect(() => {
-    dispatch(getNews({ newUrl: null, ordering: '-published_at' }))
+    // dispatch(setFilters({ ordering: '-published_at' }))
+    dispatch(getNews({ newUrl: null }))
   }, [dispatch])
 
   function handleOnChangeLifeTimeOption(
@@ -51,7 +53,8 @@ export function News() {
       newValue?.value === lifeTimeOptionsKeys.newest
         ? '-published_at'
         : 'published_at'
-    dispatch(getNews({ ordering }))
+    dispatch(setFilters({ ordering }))
+    dispatch(getNews({ newUrl: null }))
   }
 
   function handleOnChangeUpdateTimeOption(
@@ -66,8 +69,8 @@ export function News() {
       newValue?.value === updateTimeOptionsKeys.freshData
         ? '-updated_at'
         : 'updated_at'
-    console.log(ordering)
-    dispatch(getNews({ ordering }))
+    dispatch(setFilters({ ordering }))
+    dispatch(getNews({ newUrl: null }))
   }
 
   if (news.isLoading) {

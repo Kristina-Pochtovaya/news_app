@@ -21,7 +21,6 @@ export type AuthorType = {
   name: string
   socials: SocialsType
 }
-
 export type NewsType = {
   id: number
   title: string

@@ -5,13 +5,15 @@ import { useEffect, useState } from 'react'
 import { DEFAULT_DELAY, useDebounce } from '../../helpers/debounce'
 import { getNews } from '../../store/thunks/news'
 import { Input } from '../input/input'
+import { setFilters } from '../../store/slices/news_slice'
 
 export function SearchControllers() {
   const [isSearch, setIsSearch] = useState(false)
   const [searchValue, setSearchValue] = useState('')
 
   const debouncedGetNews = useDebounce((search: string) => {
-    dispatch(getNews({ search: search || undefined }))
+    dispatch(setFilters({ search: search || undefined }))
+    dispatch(getNews())
   }, DEFAULT_DELAY)
 
   useEffect(() => {
@@ -40,7 +42,8 @@ export function SearchControllers() {
       {isSearch ? (
         <Button
           handleOnClick={() => {
-            dispatch(getNews({ search: undefined }))
+            dispatch(setFilters({ search: undefined }))
+            dispatch(getNews())
             setSearchValue('')
             setIsSearch(false)
           }}
