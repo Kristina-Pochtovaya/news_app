@@ -4,10 +4,11 @@ import { useAppDispatch } from '../../store/store'
 import { getOneNews } from '../../store/thunks/one_news'
 import { selectOneNews } from '../../store/slices/one_news_slice'
 import { useSelector } from 'react-redux'
-import { NavLink, useParams } from 'react-router'
+import { useParams } from 'react-router'
 import { formatDate } from '../../helpers/format_date'
 import { Loading } from '../../components/loading/loading'
 import { Error } from '../../components/error/error'
+import { Button } from '../../components/button/button'
 
 export type OneNewsProps = {
   id: number
@@ -57,9 +58,11 @@ export function OneNews() {
             <p>{oneNews.summary}</p>
           </div>
         </div>
-        <NavLink className={styles.footer} to="/news">
-          Go to site
-        </NavLink>
+        <Button
+          classNames={{ base: styles.footer, button: styles.button }}
+          content={'Go to site'}
+          handleOnClick={() => window.open(oneNews.url, '_blank')}
+        />
       </div>
     </div>
   )

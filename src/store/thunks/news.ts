@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { api } from '../../axios'
-import { useSelector } from 'react-redux'
 import type { SliceNewsType } from '../slices/news_slice'
 
 export type GetNewsProps = {
@@ -14,7 +13,6 @@ export const getNews = createAsyncThunk<
   const state = thunkAPI.getState() as { news: SliceNewsType }
   const { ordering, search } = state.news.filters
 
-  console.log(ordering, 'ordering', search, 'search')
   const url =
     newUrl ??
     `v4/articles/?offset=0&limit=9${ordering ? `&ordering=${ordering}` : ''}${
