@@ -1,5 +1,5 @@
 import styles from './card.module.scss'
-
+import noImage from '../../assets/no_image.jpg'
 import type { NewsType } from '../../types/news'
 import { formatDate } from '../../helpers/format_date'
 import { useNavigate } from 'react-router'
@@ -19,7 +19,14 @@ export function Card({ news }: CardProps) {
     <div className={styles.card} onClick={handleOnClick}>
       <div className={styles.cardWrapper}>
         <div className={styles.image}>
-          <img src={news.image_url} alt={news.title} />
+          <img
+            src={news.image_url || noImage}
+            alt={news.title || noImage}
+            onError={(e) => {
+              e.currentTarget.onerror = null
+              e.currentTarget.src = noImage
+            }}
+          />
         </div>
         <div className={styles.title}>
           <p>{news.title}</p>

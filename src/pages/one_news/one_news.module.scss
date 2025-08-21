@@ -2,7 +2,10 @@
 
 .oneNews {
   padding: 32px 0;
+  max-width: 800px;
+  margin: auto;
 }
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -65,13 +68,14 @@
   font-family: Source Serif Pro;
   font-weight: 400;
   font-size: 20px;
-  border: none;
-  height: fit-content;
-  width: fit-content;
 }
 
 .button {
   color: rgb(51, 169, 252);
   background-color: transparent;
   text-decoration: underline;
+  border: none;
+  height: fit-content;
+  width: fit-content;
+  padding: 0;
 }

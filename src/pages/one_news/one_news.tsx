@@ -9,6 +9,7 @@ import { formatDate } from '../../helpers/format_date'
 import { Loading } from '../../components/loading/loading'
 import { Error } from '../../components/error/error'
 import { Button } from '../../components/button/button'
+import noImage from '../../assets/no_image.jpg'
 
 export type OneNewsProps = {
   id: number
@@ -52,7 +53,14 @@ export function OneNews() {
             <p>{formatDate(oneNews.published_at)}</p>
           </div>
           <div className={styles.image}>
-            <img src={oneNews.image_url} alt={oneNews.title} />
+            <img
+              src={oneNews.image_url || noImage}
+              alt={oneNews.title || noImage}
+              onError={(e) => {
+                e.currentTarget.onerror = null
+                e.currentTarget.src = noImage
+              }}
+            />
           </div>
           <div className={styles.description}>
             <p>{oneNews.summary}</p>
